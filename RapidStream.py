@@ -27,7 +27,7 @@ class SplitFrames(object):
         self.stream.write(buf)
 
 client_socket = socket.socket()
-client_socket.connect(('my_server', 8000))
+client_socket.connect(('0.0.0.0', 8000))
 connection = client_socket.makefile('wb')
 try:
     output = SplitFrames(connection)
