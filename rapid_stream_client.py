@@ -4,7 +4,18 @@ import io
 import socket
 import struct
 import time
+import argparse
 import picamera
+
+parser = argparse.ArgumentParser(description='Rapid stream client')
+
+parser.add_argument('--host', type=str, default='localhost',
+                    help='Host IP address')
+parser.add_argument('--port', type=int, default=8000,
+                    help='Port number')
+
+args = parser.parse_args()
+
 
 class SplitFrames(object):
     def __init__(self, connection):
@@ -27,7 +38,7 @@ class SplitFrames(object):
         self.stream.write(buf)
 
 client_socket = socket.socket()
-client_socket.connect(('0.0.0.0', 8000))
+client_socket.connect((args['host'], args['port']))
 connection = client_socket.makefile('wb')
 try:
     output = SplitFrames(connection)
