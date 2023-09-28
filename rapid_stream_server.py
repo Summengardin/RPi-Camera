@@ -23,10 +23,9 @@ try:
         # data from the connection
         image_stream = io.BytesIO()
         image_stream.write(connection.read(image_len))
-        # Rewind the stream, open it as an image with PIL and do some
-        # processing on it
+        
         image_stream.seek(0)
-        image = cv2.imdecode(np.fromstring(image_stream.read(), dtype=np.uint8), 1)
+        image = cv2.imdecode(np.frombuffer(image_stream.read(), dtype=np.uint8), 1)
         cv2.imshow('frame', image)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
