@@ -1,32 +1,23 @@
 import time
-from sparkfun_servophat import Sparkfun_Servo_Phat
+import pi_servo_hat
+
+TILT_SERVO = 0
+PAN_SERVO = 1
 
 # Create an instance of the Servo Phat
-servo_phat = Sparkfun_Servo_Phat()
-
-def move_servo(port, position):
-    """
-    Move a servo connected to a specified port to a specified position.
-
-    :param port: The port number where the servo is connected.
-    :param position: Position to move the servo, generally between 0 and 180.
-    """
-    servo_phat.move_servo_position(port, position, 180)
+servos = pi_servo_hat.PiServoHat()
+servos.restart()
 
 try:
     while True:
-        # Move servo on port 0 to 90 degrees
-        move_servo(0, 60)
-        # Move servo on port 1 to 90 degrees
-        move_servo(1, 60)
+        servos.move_servo_position(TILT_SERVO, 90)
+        servos.move_servo_position(PAN_SERVO, 45)
 
         # Wait for 1 second
         time.sleep(1)
 
-        # Move servo on port 0 to 0 degrees
-        move_servo(0, 70)
-        # Move servo on port 1 to 0 degrees
-        move_servo(1, 70)
+        servos.move_servo_position(TILT_SERVO, 80)
+        servos.move_servo_position(PAN_SERVO, 135)
 
         # Wait for 1 second
         time.sleep(1)
@@ -36,5 +27,5 @@ except KeyboardInterrupt:
 
 finally:
     # Ensure the PWM outputs are off before exiting
-    servo_phat.disable_servo(0)
-    servo_phat.disable_servo(1)
+    servos.disable_servo(TILT_SERVO)
+    servos.disable_servo(PAN_SERVO)
