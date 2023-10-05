@@ -6,6 +6,7 @@ PAN_SERVO = 1
 
 # Create an instance of the Servo Phat
 servos = pi_servo_hat.PiServoHat()
+
 servos.restart()
 
 try:
