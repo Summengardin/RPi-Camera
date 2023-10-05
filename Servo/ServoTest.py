@@ -10,14 +10,14 @@ servos.restart()
 
 try:
     while True:
-        servos.move_servo_position(TILT_SERVO, 90)
-        servos.move_servo_position(PAN_SERVO, 45)
+        servos.move_servo_position(TILT_SERVO, 40)
+        servos.move_servo_position(PAN_SERVO, 20)
 
         # Wait for 1 second
         time.sleep(1)
 
-        servos.move_servo_position(TILT_SERVO, 80)
-        servos.move_servo_position(PAN_SERVO, 135)
+        servos.move_servo_position(TILT_SERVO, 60)
+        servos.move_servo_position(PAN_SERVO, 90)
 
         # Wait for 1 second
         time.sleep(1)
